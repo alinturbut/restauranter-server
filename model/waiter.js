@@ -7,7 +7,7 @@ var Schema = mongoose.schema;
 /**
  * Schema for the waitress
  */
-var Waiter = new Schema({
+var Waiter = new mongoose.Schema({
     firstName: {
         type: String,
         required: true

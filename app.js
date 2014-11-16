@@ -10,6 +10,9 @@ var routes = require('./routes/index');
 
 var app = express();
 
+// Configuration
+app.use(express.static(__dirname + '/public'));
+
 //connection with the database
 mongoose.connect('mongodb://localhost:8001/restauranter');
 
