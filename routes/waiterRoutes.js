@@ -4,12 +4,16 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var WaiterController = require('../controllers/waiterController');
+var WaiterController = require('../controllers/waiterController.js');
 
 module.exports = function(app, responseFunction){
     app.get('/waiter/all', function(req,res){
-        var allWaiters = WaiterController.findAll(function(err,data){
+        WaiterController.findAll(function(err,data){
             responseFunction(res, err, data);
         });
+    });
+
+    app.get('/', function(req,res){
+       res.json('Here\' some text :-)');
     });
 };

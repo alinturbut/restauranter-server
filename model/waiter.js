@@ -32,3 +32,5 @@ var Waiter = new mongoose.Schema({
         type: Number
     }
 });
+
+module.exports = mongoose.model('Waiter', Waiter);

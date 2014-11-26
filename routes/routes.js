@@ -3,7 +3,6 @@
  */
 
 var waiterRoutes = require('./waiterRoutes.js');
-require('../controllers/waiterController.js');
 
 module.exports = function(app){
     var responseFunction = function(res,err,response){
