@@ -1,13 +1,9 @@
 /**
- * Created by Alin on 11/16/2014.
+ * Created by Turbut Alin on 28.11.2014.
  */
 var mongoose = require('mongoose');
-var Schema = mongoose.schema;
 
-/**
- * Schema for the waitress
- */
-var Waiter = new mongoose.Schema({
+var Administrator = mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -28,11 +24,7 @@ var Waiter = new mongoose.Schema({
         required: true
     },
 
-    monthsOfExperience: {
-        type: Number
-    },
-
-    role: "waiter"
+    role: "administrator"
 });
 
-module.exports = mongoose.model('Waiter', Waiter);
+module.exports = mongoose.model("Administrator", Administrator);
