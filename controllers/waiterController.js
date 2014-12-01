@@ -10,7 +10,7 @@ exports.save = function(firstName, lastName, username, password, monthsOfExperie
     var newWaiter = new Waiter({
         firstName: firstName,
         lastName: lastName,
-        usernamae: username,
+        username: username,
         password: password,
         monthsOfExperience: monthsOfExperience
     })

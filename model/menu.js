@@ -5,21 +5,14 @@ var mongoose = require('mongoose');
 var Drink = require('./drink.js');
 var Food = require('./food.js');
 
-var Order = mongoose.Schema({
+var Menu = mongoose.Schema({
    drinks: {
        type: [Drink],
-       required: false
+       required: true
    },
 
     foods: {
         type: [Food],
-        required: false
-    },
-
-    price: {
-        type: Number,
         required: true
     }
 });
-
-module.exports = mongoose.model('Order', Order);
