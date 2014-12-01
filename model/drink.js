@@ -9,7 +9,7 @@ var Drink = mongoose.Schema({
         required: true
     },
 
-    category: {
+    categoryId: {
         type: String,
         required: true
     },

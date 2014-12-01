@@ -2,6 +2,7 @@
  * Created by Alin on 11/16/2014.
  */
 var Waiter = require('../model/waiter');
+var utils = require('../util/passwordUtil.js');
 
 /**
  * Controller for the waitress class
@@ -11,7 +12,7 @@ exports.save = function(firstName, lastName, username, password, monthsOfExperie
         firstName: firstName,
         lastName: lastName,
         username: username,
-        password: password,
+        password: utils.hashPassword(password),
         monthsOfExperience: monthsOfExperience
     })
     newWaiter.save(function(err){
@@ -27,7 +28,7 @@ exports.update = function(id, firstName, lastName, username, password, monthsOfE
     Waiter.findByIdAndUpdate(id,{
         firstName: firstName,
         lastName: lastName,
-        usernamae: username,
+        username: username,
         password: password,
         monthsOfExperience: monthsOfExperience
     }, function(err,waiter) {
