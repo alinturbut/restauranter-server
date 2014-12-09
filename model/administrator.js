@@ -24,7 +24,10 @@ var Administrator = mongoose.Schema({
         required: true
     },
 
-    role: "administrator"
+    role: {
+        type: String,
+        default: "administrator"
+    }
 });
 
 module.exports = mongoose.model("Administrator", Administrator);

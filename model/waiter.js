@@ -32,7 +32,10 @@ var Waiter = new mongoose.Schema({
         type: Number
     },
 
-    role: "waiter"
+    role: {
+        type: String,
+        default: "waiter"
+    }
 });
 
 module.exports = mongoose.model('Waiter', Waiter);
