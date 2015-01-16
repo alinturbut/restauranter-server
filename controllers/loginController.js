@@ -3,6 +3,7 @@
  */
 var Waiter = require('../model/waiter.js');
 var Administrator = require('../model/administrator.js');
+var utils = require('../util/passwordUtil.js');
 
 /**
  * Controller for logging a waiter/administrator in
@@ -17,7 +18,7 @@ exports.login = function(email, password, callback){
            }else{
                var hashedPassword = utils.hashPassword(password);
                if(hashedPassword != waiters[0].password){
-                   callback({'message': 'Invalid password!'}, 404);
+                   callback({'message': 'Invalid password!'}, 401);
                }else{
                    callback(null, {'waiter': waiters[0]});
                }

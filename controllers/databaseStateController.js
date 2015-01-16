@@ -8,7 +8,7 @@ exports.findDatabaseState = function(callback){
        if(err){
            callback(err,500);
        }else{
-           callback(null, {'databaseState:': databaseState[0]});
+           callback(null, databaseState[0]);
        }
     });
 };
@@ -16,9 +16,24 @@ exports.findDatabaseState = function(callback){
 exports.markDatabaseInitialized = function(){
     DatabaseState.find(function(err,databaseState){
         if(err){
-            //do nothing
+            console.log(err);
         }else{
-            databaseState[0].state = true;
+            if(databaseState.length === 0){
+                createDatabaseStateVariable();
+            }else{
+                databaseState[0].state = true;
+            }
         }
     })
+};
+
+var createDatabaseStateVariable = function(){
+    var dbState = new DatabaseState({
+        state: true
+    });
+    dbState.save(function(err){
+        if(err){
+            console.log(err);
+        }
+    });
 };

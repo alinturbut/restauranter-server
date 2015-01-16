@@ -16,3 +16,5 @@ var Menu = mongoose.Schema({
         required: true
     }
 });
+
+module.exports = mongoose.model('Menu', Menu);

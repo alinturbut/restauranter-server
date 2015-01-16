@@ -10,4 +10,4 @@ var Category = mongoose.Schema({
    }
 });
 
-module.exports = mongoose.Model('Category', Category);
+module.exports = mongoose.model('Category', Category);

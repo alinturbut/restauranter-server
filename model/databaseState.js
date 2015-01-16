@@ -11,4 +11,4 @@ var DatabaseState = mongoose.Schema({
    }
 });
 
-module.exports = mongoose.model('DatabaseState');
+module.exports = mongoose.model('DatabaseState', DatabaseState);

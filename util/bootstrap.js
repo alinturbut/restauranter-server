@@ -13,12 +13,19 @@ var boostrappedWaiters = require('../util/module_messages/waiterNames.js');
  * Function that will execute a bootstrap over the db creating some drinks, foods, menus, waiters
  */
 exports.execute = function(callback){
-    var dbState;
+    var dbState = null;
     DatabaseStateController.findDatabaseState(function(err,data){
         if(err) {
             console.log(err);
         }else{
             dbState = data;
+
+            if(dbState === null || dbState.state === false){
+                console.log(STRINGS.BOOTSTRAP_STARTED);
+                initializeDatabase(responseFunction);
+            }else{
+                console.log(STRINGS.BOOSTRAP_OK);
+            }
         }
     });
 
@@ -29,16 +36,10 @@ exports.execute = function(callback){
             console.log(response);
         }
     };
-
-    if(dbState.state === false){
-        console.log(STRINGS.BOOTSTRAP_STARTED);
-        initializeDatabase(responseFunction);
-    }else{
-        console.log(STRINGS.BOOSTRAP_OK);
-    }
 };
 
 var initializeDatabase = function(responseFunction){
+    boostrappedWaiters = boostrappedWaiters.waiter1;
     WaiterController.save(boostrappedWaiters.firstName, boostrappedWaiters.lastName,
         boostrappedWaiters.username, boostrappedWaiters.password, boostrappedWaiters.monthsOfExperience, function(err,data){
             if(err){
@@ -47,5 +48,5 @@ var initializeDatabase = function(responseFunction){
                 responseFunction(err,data);
             }
         });
-
+    DatabaseStateController.markDatabaseInitialized();
 };

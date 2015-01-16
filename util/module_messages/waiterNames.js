@@ -10,4 +10,4 @@ var waiter1 = {
     monthsOfExperience: 3
 };
 
-module.exports = waiter1;
+module.exports.waiter1 = waiter1;

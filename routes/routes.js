@@ -3,11 +3,12 @@
  */
 
 var waiterRoutes = require('./waiterRoutes.js');
+var loginRoutes = require('./loginRoutes.js');
 
 module.exports = function(app){
     var responseFunction = function(res,err,response){
         if(err){
-            res.send(response, err);
+            res.status(err).send(response).end();
         }else{
             res.json(response);
             console.log(response);
@@ -15,4 +16,5 @@ module.exports = function(app){
     }
 
     waiterRoutes(app,responseFunction);
+    loginRoutes(app, responseFunction);
 };

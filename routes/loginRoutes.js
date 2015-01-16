@@ -5,8 +5,8 @@ var LoginController = require('../controllers/loginController.js');
 
 module.exports = function(app, responseFunction){
     app.get('/login', function(req, res){
-        LoginController.login(req.body.email,req.body.password, function(err){
-            responseFunction(res, err);
+        LoginController.login(req.query.email,req.query.password, function(err, waiters){
+            responseFunction(res, err, waiters);
         });
     });
 };

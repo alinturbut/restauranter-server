@@ -3,6 +3,7 @@ var connect = require('connect');
 var mongoose = require('mongoose');
 var port = (process.env.port || 8089);
 var routes = require('./routes/routes.js');
+var bootstrap = require('./util/bootstrap.js');
 
 var app = express();
 
@@ -42,5 +43,7 @@ require('./routes/routes.js')(app);
 //connection with the database
 mongoose.connect('mongodb://localhost:8010/restauranter');
 
+bootstrap.execute();
 app.listen(port);
+console.log("App is listening on port:" + port);
 module.exports = app;

@@ -35,4 +35,4 @@ var Drink = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.Model('Drink', Drink);
+module.exports = mongoose.model('Drink', Drink);

@@ -13,6 +13,6 @@ module.exports = function(app, responseFunction){
     });
 
     app.get('/', function(req,res){
-       res.json('Here\' some text :-)');
+       res.json('Here\'s some text :-)');
     });
 };

@@ -20,4 +20,4 @@ var Food = mongoose.Schema ({
     }
 });
 
-module.exports = mongoose.Model("Food", Food);
+module.exports = mongoose.model("Food", Food);
