@@ -1,12 +1,16 @@
-# README #
+# RestauranterAPI #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is the API for the Restauranter application.
 
-### What is this repository for? ###
+### APIs###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Login
+* Waiter handling
+* Menu handling
+* Order handling
+* Receipt handling
+* Tables handling
+TBC
 
 ### How do I get set up? ###
 
@@ -23,7 +27,6 @@ This README would normally document whatever steps are necessary to get your app
 * Code review
 * Other guidelines
 
-### Who do I talk to? ###
+### Contact ###
 
-* Repo owner or admin
-* Other community or team contact
+* Alin Turbut - [alinturbut@gmail.com](alinturbut@gmail.com)
