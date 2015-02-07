@@ -12,20 +12,8 @@ This is the API for the Restauranter application.
 * Tables handling
 TBC
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+### How to call the API? ###
+* the list of available routes will be added later
 
 ### Contact ###
 
