@@ -19,4 +19,14 @@ exports.save = function(categoryId, name, price, callback){
             callback(null, {'food': newFood});
         }
     });
-}
+};
+
+exports.findAll = function(callback){
+    Food.find(function(err,foods){
+        if(err){
+            callback(err);
+        }else{
+            callback(null, {'foods': foods});
+        };
+    });
+};

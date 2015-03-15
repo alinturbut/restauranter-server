@@ -3,9 +3,9 @@
  */
 var mongoose = require('mongoose');
 
-var Food = mongoose.Schema ({
+var Food = new mongoose.Schema ({
     categoryId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref: 'Category',
         required: true
     },
 
@@ -15,7 +15,7 @@ var Food = mongoose.Schema ({
     },
 
     price: {
-        type: String,
+        type: Number,
         required: true
     }
 });

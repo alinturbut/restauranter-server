@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-var DatabaseState = mongoose.Schema({
+var DatabaseState = new mongoose.Schema({
    state: {
        type: Boolean,
        required: true,

@@ -14,7 +14,7 @@ exports.save = function(type, categoryId, name, manufacturer, alcoholPercentage,
         manufacturer: manufacturer,
         alcoholPercentage: alcoholPercentage,
         price: price
-    })
+    });
     newDrink.save(function(err){
        if(err){
            callback(err,500);
@@ -49,7 +49,7 @@ exports.findAll = function(callback){
        if(err){
            callback(err,500);
        }else{
-           callback(null, {'waiters': waiters});
+           callback(null, {'drinks': waiters});
        }
     });
 };

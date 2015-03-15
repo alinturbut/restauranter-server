@@ -4,7 +4,8 @@
 
 var strings = {
     BOOSTRAP_OK: 'Database is initialized. No bootstrap required!',
-    BOOTSTRAP_STARTED: 'Starting bootstrap...'
+    BOOTSTRAP_STARTED: 'Starting bootstrap...',
+    MENU_NAME: 'Restauranter Default'
 };
 
 module.exports = strings;

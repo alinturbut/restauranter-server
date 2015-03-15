@@ -5,14 +5,18 @@ var mongoose = require('mongoose');
 var Drink = require('./drink.js');
 var Food = require('./food.js');
 
-var Menu = mongoose.Schema({
+var Menu = new mongoose.Schema({
+   name: {
+       type: String,
+       require: true
+   },
    drinks: {
-       type: [Drink],
+       type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Drink'}],
        required: true
    },
 
     foods: {
-        type: [Food],
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Food'}],
         required: true
     }
 });

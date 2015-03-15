@@ -10,6 +10,7 @@
     "mongoose": "3.8.0",
     "mongoose-relationship" : "~0.0.6",
     "connect" : "~2.8",
-    "crypto" : "0.0.3"
+    "crypto" : "0.0.3",
+    "async" : "0.9.0"
   }
 }

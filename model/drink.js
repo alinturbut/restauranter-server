@@ -3,14 +3,14 @@
  */
 var mongoose = require('mongoose');
 
-var Drink = mongoose.Schema({
+var Drink = new mongoose.Schema({
     type: {
         type: String,
         required: true
     },
 
     categoryId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref: 'Category',
         required: true
     },
 

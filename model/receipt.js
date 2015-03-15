@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-var Receipt = mongoose.Schema({
+var Receipt = new mongoose.Schema({
    orderId: {
        type: String,
        required: true

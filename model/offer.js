@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-var Offer = mongoose.Schema({
+var Offer = new mongoose.Schema({
    orderId: {
        type: String,
        required: true

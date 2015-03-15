@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-var Administrator = mongoose.Schema({
+var Administrator = new mongoose.Schema({
     firstName: {
         type: String,
         required: true

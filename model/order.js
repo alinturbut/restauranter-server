@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Drink = require('./drink.js');
 var Food = require('./food.js');
 
-var Order = mongoose.Schema({
+var Order = new mongoose.Schema({
    drinks: {
        type: [Drink],
        required: false

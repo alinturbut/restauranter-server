@@ -2,7 +2,6 @@
  * Created by Alin on 11/16/2014.
  */
 var mongoose = require('mongoose');
-var Schema = mongoose.schema;
 
 /**
  * Schema for the waitress
