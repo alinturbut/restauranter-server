@@ -10,6 +10,12 @@ module.exports = function(app, responseFunction){
         });
     });
 
+    app.get('/food/categoryId',function(req,res){
+        FoodService.findByCategoryId(req.query.categoryId, function(err,data){
+            responseFunction(res, err, data);
+        });
+    });
+
     app.post('/food/addFood',function(req,res){
         var foodName = req.body.name;
         var foodPrice = req.body.price;

@@ -7,6 +7,12 @@ module.exports = function(app, responseFunction){
         });
     });
 
+    app.get('/drink/categoryId',function(req,res){
+        FoodService.findByCategoryId(req.query.categoryId, function(err,data){
+            responseFunction(res, err, data);
+        });
+    });
+
     app.post('/drink/addDrink',function(req,res){
         var drinkName = req.body.name;
         var drinkPrice = req.body.price;
