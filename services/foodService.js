@@ -30,3 +30,13 @@ exports.findAll = function(callback){
         };
     });
 };
+
+exports.findByCategoryId = function(categoryId, callback){
+    Food.find({categoryId: categoryId}, function(err, foods){
+        if(err){
+            callback(err,500);
+        }else{
+            callback(null, {'foods': foods});
+        }
+    });
+};
