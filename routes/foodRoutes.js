@@ -9,4 +9,14 @@ module.exports = function(app, responseFunction){
             responseFunction(res, err, data);
         });
     });
+
+    app.post('/food/addFood',function(req,res){
+        var foodName = req.body.name;
+        var foodPrice = req.body.price;
+        var categoryId = req.body.category;
+
+        FoodService.save(categoryId, foodName, foodPrice, function(err,data) {
+            responseFunction(res, err, data);
+        });
+    });
 };

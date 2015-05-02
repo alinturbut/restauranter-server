@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Menu Items Add Module</title>
+    <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<form id="foodForm">
+    <fieldset>
+        <legend>Add Food</legend>
+        Name:<br>
+        <input type="text" name="name">
+        <br>
+        Price:<br>
+        <input type="text" name="price">
+        <br>
+        Category:<br>
+        <select class="categorySelect" name="category"></select>
+        <br><br>
+        <input id="saveFoodButton" type="submit" value="Save food"></fieldset>
+</form>
+<br>
+<form id="drinkForm">
+    <fieldset>
+        <legend>Add Drink</legend>
+        Name:<br>
+        <input type="text" name="name">
+        <br>
+        Price:<br>
+        <input type="text" name="price">
+        <br>
+        Category:<br>
+        <select class="categorySelect" name="category"></select>
+        <br>
+        Type:<br>
+        <input type="text" name="type">
+        <br>
+        Manufacturer:<br>
+        <input type="text" name="manufacturer">
+        <br>
+        Alcohol percentage:<br>
+        <input type="text" name="alcoholPercentage">
+        <br><br>
+        <input id="saveDrinkButton" type="submit" value="Save food"/></fieldset>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var currentAddress = "http://localhost:8089";
+        $.getJSON(currentAddress + "/category/all", function(data) {
+            $.each(data.categories, function(i, item){
+                fillCategorySelect(data.categories[i]);
+            });
+        });
+
+        $('#saveFoodButton').click(function() {
+            $.post(currentAddress + "/food/addFood", $('#foodForm').serialize(), function(data){
+                if(data) {
+                    alert("Food added to the menu.");
+                }
+            });
+        })
+
+        $('#saveDrinkButton').click(function(){
+            $.post(currentAddress + "/drink/addDrink", $('#drinkForm').serialize(), function(data){
+                if(data) {
+                    alert("Drink added to the menu.");
+                }
+            });
+        });
+    });
+
+    function fillCategorySelect(data) {
+        $('.categorySelect').append("<option value='" + data._id + "'>" + data.name + "</option>");
+    }
+</script>
+</body>
+</html>

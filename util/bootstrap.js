@@ -31,7 +31,7 @@ exports.execute = function(callback){
                 console.log(STRINGS.BOOTSTRAP_STARTED);
                 initializeWaiters(responseFunction);
                 intializeMenu(responseFunction);
-                //DatabaseStateController.markDatabaseInitialized();
+                DatabaseStateController.markDatabaseInitialized();
             }else{
                 console.log(STRINGS.BOOSTRAP_OK);
             }
