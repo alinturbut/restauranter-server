@@ -7,8 +7,8 @@ module.exports = function(app, responseFunction){
         });
     });
 
-    app.get('/drink/categoryId',function(req,res){
-        FoodService.findByCategoryId(req.query.categoryId, function(err,data){
+    app.get('/drink/findBycategoryId',function(req,res){
+        DrinkService.findByCategoryId(req.query.categoryId, function(err,data){
             responseFunction(res, err, data);
         });
     });

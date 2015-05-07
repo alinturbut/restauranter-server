@@ -24,7 +24,7 @@ app.use(connect.logger('dev'));
 app.use(connect.json());
 app.use(connect.urlencoded());
 
-app.all('/*', function(req, res, next) {
+app.all('/*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', req.headers.origin);
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Credentials', false);
@@ -33,7 +33,7 @@ app.all('/*', function(req, res, next) {
     next();
 });
 
-app.options('*', function(req, res) {
+app.options('*', function (req, res) {
     res.send(200);
 });
 
@@ -41,7 +41,13 @@ app.options('*', function(req, res) {
 require('./routes/routes.js')(app);
 
 //connection with the database
-mongoose.connect('mongodb://localhost:8010/restauranter');
+if (process.argv[2] != null) {
+    mongoose.connect('mongodb://' + process.argv[2]);
+    console.log('Found mongo database location correctly!');
+} else {
+    console.log('Attempting to access mongo on default location!');
+    mongoose.connect('mongodb://localhost:8010/restauranter');
+}
 
 bootstrap.execute();
 app.listen(port);

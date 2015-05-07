@@ -10,7 +10,7 @@ module.exports = function(app, responseFunction){
         });
     });
 
-    app.get('/food/categoryId',function(req,res){
+    app.get('/food/findBycategoryId',function(req,res){
         FoodService.findByCategoryId(req.query.categoryId, function(err,data){
             responseFunction(res, err, data);
         });
