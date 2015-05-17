@@ -12,5 +12,9 @@
     "connect" : "~2.8",
     "crypto" : "0.0.3",
     "async" : "0.9.0"
-  }
+  },
+  "scripts": {
+  	"start": "node app.js"
+  },
+  "main": "app.js"
 }

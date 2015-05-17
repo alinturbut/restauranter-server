@@ -1,7 +1,9 @@
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose');
-var port = (process.env.port || 8089);
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8089;
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var mongoDbOpenshift = process.env.OPENSHIFT_MONGODB_DB_URL;
 var routes = require('./routes/routes.js');
 var bootstrap = require('./util/bootstrap.js');
 
@@ -41,8 +43,11 @@ app.options('*', function (req, res) {
 require('./routes/routes.js')(app);
 
 //connection with the database
-if (process.argv[2] != null) {
-    mongoose.connect('mongodb://' + process.argv[2]);
+if(mongoDbOpenshift) {
+    mongoose.connect(mongoDbOpenshift);
+    console.log('Found mongo database on openshift!');
+} else if (process.argv[2] != null) {
+    mongoose.connect(process.argv[2]);
     console.log('Found mongo database location correctly!');
 } else {
     console.log('Attempting to access mongo on default location!');
@@ -50,6 +55,7 @@ if (process.argv[2] != null) {
 }
 
 bootstrap.execute();
-app.listen(port);
-console.log("App is listening on port:" + port);
+app.listen(port, ipaddress, function(){
+    console.log("App is listening on port:" + port);
+});
 module.exports = app;
