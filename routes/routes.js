@@ -10,6 +10,7 @@ var menuRoutes = require('./menuRoutes.js');
 var orderRoutes = require('./orderRoutes.js');
 var drinkRoutes = require('./drinkRoutes.js');
 var tableRoutes = require('./tableRoutes.js');
+var path = require('path');
 
 module.exports = function(app){
     var responseFunction = function(res,err,response){
@@ -20,6 +21,10 @@ module.exports = function(app){
             console.log(response);
         }
     }
+
+    app.get('/admin', function(req, res){
+       res.sendFile(path.join(__dirname + '/html/addMenuItems.html'));
+    });
 
     waiterRoutes(app,responseFunction);
     loginRoutes(app, responseFunction);

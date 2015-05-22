@@ -16,5 +16,12 @@ module.exports = function(app, responseFunction){
         TableService.save(tableNumber, seats, function(err, data){
             responseFunction(res, err, data);
         })
+    });
+
+    app.post('/table/delete', function(req, res){
+        var id = req.body.id;
+        TableService.delete(id, function(err, data){
+            responseFunction(res, err, data);
+        })
     })
 };

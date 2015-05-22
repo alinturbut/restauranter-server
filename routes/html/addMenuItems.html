@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Menu Items Add Module</title>
-    <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 
@@ -63,7 +63,7 @@ Server location:<br>
         <legend>Add New Table</legend>
         Table number:<br>
         <input type="text" name="tableNumber">
-        <select style="margin-left: 50px;" class="tableSelect" name="currentTable"></select>
+        <select style="margin-left: 50px;" id="tableNumberSelect" name="currentTable"></select>
         <br>
         Seats:<br>
         <input type="text" name="seats">
@@ -108,27 +108,65 @@ Server location:<br>
         });
 
         $('#saveTableButton').click(function(){
-            var form = $('#tableForm').serialize();
-            $.post(currentAddress + "/table/save", form, function(data){
+            $.post(currentAddress + "/table/save", $('#tableForm').serialize(), function(data){
                 if(data){
                     alert('Table added.');
                 }
             });
         });
+
+        $('#deleteTableButton').click(function(){
+            var id = $('#tableNumberSelect').val();
+            $.post(currentAddress + "/table/delete", {'id': id}, function(data){
+                if(data){
+                    alert('Table added.');
+                }
+            });
+        })
     });
 
     function refreshCategories() {
-        $.getJSON(currentAddress + "/category/all", function(data) {
+//        $.getJSON(currentAddress + "/category/all", function(data) {
+//            $.each(data.categories, function(i, item){
+//                fillCategorySelect(data.categories[i]);
+//            });
+//        });
+
+        $.ajax({
+            url: currentAddress + "/category/all",
+            type: 'GET',
+            beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+            }
+        }).done(function(data){
+            var data = $.parseJSON(data);
             $.each(data.categories, function(i, item){
                 fillCategorySelect(data.categories[i]);
             });
+        }).fail(function(){
+            alert("Something went wrong!");
         });
 
-        $.getJSON(currentAddress + "/table/all", function(data) {
+//        $.getJSON(currentAddress + "/table/all", function(data) {
+//            $.each(data.tables, function(i, item){
+//                fillTableSelect(data.tables[i]);
+//            });
+//        });
+////
+        $.ajax({
+            url: currentAddress + "/table/all",
+            type: 'GET',
+            beforeSend: function( xhr ) {
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+                xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+            }
+        }).done(function(data){
             $.each(data.tables, function(i, item){
                 fillTableSelect(data.tables[i]);
             });
-        });
+        }).fail(function(){
+            alert("Something went wrong!");
+        })
     }
 
     function fillCategorySelect(data) {
@@ -136,7 +174,7 @@ Server location:<br>
     }
 
     function fillTableSelect(data) {
-        $('.tableSelect').append("<option value='" + data._id + "'>" + data.tableNumber + "</option>");
+        $('#tableNumberSelect').append("<option value='" + data._id + "'>" + data.tableNumber + "</option>");
     }
 </script>
 </body>

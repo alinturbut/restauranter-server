@@ -16,7 +16,7 @@ app.use(function (err, req, res, next) {
         res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
         res.header('Access-Control-Allow-Credentials', false);
         res.header('Access-Control-Max-Age', '86400');
-        res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override,  Content-Type, Accept, Authorization');
+        res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, X-Requested-With, X-HTTP-Method-Override,  Content-Type, Accept, Authorization');
         res.status(401).send(401)
         console.log("401 error")
     }
@@ -27,11 +27,12 @@ app.use(connect.json());
 app.use(connect.urlencoded());
 
 app.all('/*', function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    req.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Credentials', false);
     res.header('Access-Control-Max-Age', '86400');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override,  Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, X-Requested-With, X-HTTP-Method-Override,  Content-Type, Accept, Authorization');
     next();
 });
 
@@ -43,7 +44,7 @@ app.options('*', function (req, res) {
 require('./routes/routes.js')(app);
 
 //connection with the database
-if(mongoDbOpenshift) {
+if (mongoDbOpenshift) {
     mongoose.connect(mongoDbOpenshift);
     console.log('Found mongo database on openshift!');
 } else if (process.argv[2] != null) {
@@ -55,7 +56,7 @@ if(mongoDbOpenshift) {
 }
 
 bootstrap.execute();
-app.listen(port, ipaddress, function(){
+app.listen(port, ipaddress, function () {
     console.log("App is listening on port:" + port);
 });
 module.exports = app;
