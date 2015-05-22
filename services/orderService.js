@@ -5,11 +5,12 @@ var Order = require('../model/order.js')
 /**
  * Controller for Order entity
  */
-exports.save = function(drinks, foods, price, callback){
+exports.save = function(drinks, foods, price, tableId, callback){
     var newOrder = new Order({
         drinks: drinks,
         foods: foods,
-        price: price
+        price: price,
+        tableId: tableId
     });
     newOrder.save(function(err){
        if(err) {

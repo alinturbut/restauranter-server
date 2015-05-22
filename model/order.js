@@ -19,6 +19,11 @@ var Order = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+
+    tableId: {
+        type: Number,
+        required: true
     }
 });
 

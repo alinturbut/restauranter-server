@@ -6,6 +6,15 @@
     <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
 </head>
 <body>
+
+Server location:<br>
+<select class="serverSelect" name="server">
+    <option value='localhost'>Localhost</option>
+    <option value='server'>Openshift server</option>
+</select>
+
+<br><br>
+
 <form id="foodForm">
     <fieldset>
         <legend>Add Food</legend>
@@ -20,7 +29,9 @@
         <br><br>
         <input id="saveFoodButton" type="submit" value="Save food"></fieldset>
 </form>
+
 <br>
+
 <form id="drinkForm">
     <fieldset>
         <legend>Add Drink</legend>
@@ -42,16 +53,43 @@
         Alcohol percentage:<br>
         <input type="text" name="alcoholPercentage">
         <br><br>
-        <input id="saveDrinkButton" type="submit" value="Save food"/></fieldset>
+        <input id="saveDrinkButton" type="submit" value="Save drink"/></fieldset>
 </form>
+
+<br>
+
+<form id="tableForm">
+    <fieldset>
+        <legend>Add New Table</legend>
+        Table number:<br>
+        <input type="text" name="tableNumber">
+        <select style="margin-left: 50px;" class="tableSelect" name="currentTable"></select>
+        <br>
+        Seats:<br>
+        <input type="text" name="seats">
+        <br><br>
+        <input id="saveTableButton" type="submit" value="Save table"/>
+        <input style="margin-left: 144px;" id="deleteTableButton" type="submit" value="Delete table"/>
+    </fieldset>
+
+</form>
+
+
 <script type="text/javascript">
+    var currentAddress = "http://localhost:8089";
+
     $(document).ready(function() {
-        var currentAddress = "http://localhost:8089";
-        $.getJSON(currentAddress + "/category/all", function(data) {
-            $.each(data.categories, function(i, item){
-                fillCategorySelect(data.categories[i]);
-            });
+        $('.serverSelect').change(function(){
+            if($('.serverSelect').val() === 'server'){
+                currentAddress = "http://api-restauranter.rhcloud.com";
+                refreshCategories();
+            }else{
+                currentAddress = "http://localhost:8089";
+                refreshCategories();
+            }
         });
+
+        refreshCategories();
 
         $('#saveFoodButton').click(function() {
             $.post(currentAddress + "/food/addFood", $('#foodForm').serialize(), function(data){
@@ -68,10 +106,37 @@
                 }
             });
         });
+
+        $('#saveTableButton').click(function(){
+            var form = $('#tableForm').serialize();
+            $.post(currentAddress + "/table/save", form, function(data){
+                if(data){
+                    alert('Table added.');
+                }
+            });
+        });
     });
+
+    function refreshCategories() {
+        $.getJSON(currentAddress + "/category/all", function(data) {
+            $.each(data.categories, function(i, item){
+                fillCategorySelect(data.categories[i]);
+            });
+        });
+
+        $.getJSON(currentAddress + "/table/all", function(data) {
+            $.each(data.tables, function(i, item){
+                fillTableSelect(data.tables[i]);
+            });
+        });
+    }
 
     function fillCategorySelect(data) {
         $('.categorySelect').append("<option value='" + data._id + "'>" + data.name + "</option>");
+    }
+
+    function fillTableSelect(data) {
+        $('.tableSelect').append("<option value='" + data._id + "'>" + data.tableNumber + "</option>");
     }
 </script>
 </body>

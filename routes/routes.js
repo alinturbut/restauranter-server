@@ -9,6 +9,7 @@ var foodRoutes = require('./foodRoutes.js');
 var menuRoutes = require('./menuRoutes.js');
 var orderRoutes = require('./orderRoutes.js');
 var drinkRoutes = require('./drinkRoutes.js');
+var tableRoutes = require('./tableRoutes.js');
 
 module.exports = function(app){
     var responseFunction = function(res,err,response){
@@ -27,4 +28,5 @@ module.exports = function(app){
     menuRoutes(app, responseFunction);
     orderRoutes(app, responseFunction);
     drinkRoutes(app, responseFunction);
+    tableRoutes(app, responseFunction);
 };
