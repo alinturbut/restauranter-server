@@ -2,7 +2,7 @@ var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose');
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8089;
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
 var mongoDbOpenshift = process.env.OPENSHIFT_MONGODB_DB_URL;
 var routes = require('./routes/routes.js');
 var bootstrap = require('./util/bootstrap.js');
@@ -57,6 +57,6 @@ if (mongoDbOpenshift) {
 
 bootstrap.execute();
 app.listen(port, ipaddress, function () {
-    console.log("App is listening on port:" + port);
+    console.log("App is listening on port:" + port + " address: " + ipaddress);
 });
 module.exports = app;

@@ -28,6 +28,16 @@ exports.findAll = function(callback){
     });
 };
 
+exports.findById = function(id, callback){
+    Table.findById(id, function(err, table){
+        if(err){
+            callback(err,null);
+        }else{
+            callback(null, {'table': table});
+        }
+    });
+};
+
 exports.delete = function(id, callback){
     Table.remove({'_id': id}, function(err){
         if (err) {

@@ -23,5 +23,12 @@ module.exports = function(app, responseFunction){
         TableService.delete(id, function(err, data){
             responseFunction(res, err, data);
         })
+    });
+
+    app.get('/table/findById' ,function(req, res){
+    	var id = req.query.id;
+        TableService.findById(id, function(err, data){
+            responseFunction(res, err, data);
+        })
     })
 };
