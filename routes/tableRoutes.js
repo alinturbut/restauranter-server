@@ -30,5 +30,13 @@ module.exports = function(app, responseFunction){
         TableService.findById(id, function(err, data){
             responseFunction(res, err, data);
         })
+    });
+
+    app.post('/table/markOccupied', function(req, res){
+        var isOccupied = req.body.isOccupied;
+        var id = req.body.id;
+        TableService.markIsOccupied(id, isOccupied, function(err, data){
+            responseFunction(res, err, data);
+        });
     })
 };

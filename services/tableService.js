@@ -57,3 +57,15 @@ exports.findById = function(id, callback){
         }
     });
 };
+
+exports.markIsOccupied = function(id, isOccupied, callback) {
+    Table.findByIdAndUpdate(id, {
+        isOccupied: isOccupied}, function(err, table){
+            if(err){
+                callback(err);
+            }else{
+                callback(null, {'table': table});
+            }
+        }
+    );
+}

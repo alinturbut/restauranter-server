@@ -7,12 +7,12 @@ var Food = require('./food.js');
 
 var Order = new mongoose.Schema({
    drinks: {
-       type: [Drink],
+       type: mongoose.Schema.Types.Mixed,
        required: false
    },
 
     foods: {
-        type: [Food],
+        type: mongoose.Schema.Types.Mixed,
         required: false
     },
 
@@ -21,8 +21,23 @@ var Order = new mongoose.Schema({
         required: true
     },
 
+    waiterId: {
+        type: String,
+        required: true
+    },
+
     tableId: {
-        type: Number,
+        type: String,
+        required: true
+    },
+
+    sentTime: {
+        type: Date,
+        required: true
+    },
+
+    orderType: {
+        type: String,
         required: true
     }
 });

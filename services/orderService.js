@@ -5,16 +5,39 @@ var Order = require('../model/order.js')
 /**
  * Controller for Order entity
  */
-exports.save = function(drinks, foods, price, tableId, callback){
+exports.save = function(drinks, foods, price, tableId, waiterId, sentTime, orderType, callback){
     var newOrder = new Order({
         drinks: drinks,
         foods: foods,
         price: price,
-        tableId: tableId
+        tableId: tableId,
+        waiterId: waiterId,
+        sentTime: new Date(sentTime),
+        orderType: orderType
     });
     newOrder.save(function(err){
        if(err) {
-           callback(err);
+           callback(err, 500);
+       } else {
+           callback(null, {'order' : newOrder});
+       }
+    });
+};
+
+exports.saveOrder = function(order, callback){
+    order = JSON.parse(order);
+    var newOrder = new Order({
+        drinks: order.drinks,
+        foods: order.foods,
+        price: order.price,
+        tableId: order.tableId,
+        waiterId: order.waiterId,
+        sentTime: new Date(order.sentTime),
+        orderType: order.orderType
+    });
+    newOrder.save(function(err){
+       if(err) {
+           callback(err, 500);
        } else {
            callback(null, {'order' : newOrder});
        }
@@ -50,6 +73,26 @@ exports.addDrinksToOrder = function(id, drinks, addedPrice, callback){
             });
         }
     })
+};
+
+exports.updateOrderType = function(id, orderType, callback){
+    Order.findByIdAndUpdate(id, {orderType: orderType}, function(err,order){
+        if(err){
+            callback(err,500);
+        }else{
+            callback(null, {'order': order});
+        }
+    });
+};
+
+exports.findByType = function(orderType, callback){
+    Order.find({orderType: orderType}, function(err, orders){
+        if(err){
+            callback(err,500);
+        }else{
+            callback(null, {'orders': orders});
+        }
+    });
 };
 
 exports.addFoodsToOrder = function(id, foods, addedPrice, callback){

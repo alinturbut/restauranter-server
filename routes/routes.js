@@ -16,6 +16,7 @@ module.exports = function(app){
     var responseFunction = function(res,err,response){
         if(err){
             res.status(err).send(response).end();
+            console.log(err);
         }else{
             res.json(response);
             console.log(response);

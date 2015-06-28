@@ -12,6 +12,12 @@ var Table = new mongoose.Schema ({
     seats: {
         type: Number,
         required: true
+    },
+
+    isOccupied: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 
